@@ -1,13 +1,21 @@
+// import firebase from 'firebase/app';
+// import 'firebase/auth';
 import axios from 'axios';
 import firebaseConfig from '../auth/apiKeys';
 // API CALLS FOR BOOKS
 const dbUrl = firebaseConfig.databaseURL;
+// const currentUserUid = firebase.auth().currentUser;
 
 // GET BOOKS
-const getBooks = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/books.json`)
-    .then((response) => resolve(Object.values(response.data)))
-    .catch((error) => reject(error));
+const getBooks = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books.json?orderBy="uid"&equalTo="${uid}"`)
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve([]);
+      }
+    }).catch((error) => reject(error));
 });
 // DELETE BOOK
 const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
@@ -16,13 +24,13 @@ const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 // CREATE BOOK
-const createBook = (bookObject) => new Promise((resolve, reject) => {
+const createBook = (bookObject, uid) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/books.json`, bookObject)
     .then((response) => {
       const body = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, body)
         .then(() => {
-          getBooks().then((booksArray) => resolve(booksArray));
+          getBooks(uid).then((booksArray) => resolve(booksArray));
         });
     }).catch((error) => reject(error));
 });
