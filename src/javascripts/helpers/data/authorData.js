@@ -42,6 +42,9 @@ const createAuthors = (authorObject, uid) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 // UPDATE AUTHOR
+// const updateAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+//   axios.patch()
+// }
 // SEARCH AUTHORS
 
 export {
