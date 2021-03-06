@@ -8,9 +8,10 @@ const showAuthors = (array) => {
     // FIXME: STUDENTS create cards for your authors
     document.querySelector('#store').innerHTML += `<div class="card">
                                                     <div class="card-body" style="height: 180px;">
-                                                    <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
+                                                    <h5 class="card-title"><a href="#" id="author-name-title--${item.firebaseKey}">${item.first_name} ${item.last_name}</a></h5>
                                                     <h5 class="card-title">${item.email}</h5>
                                                     <hr>
+                                                   
                                                     <button class="btn btn-info" data-toggle="modal" data-target="#formModal" id="edit-author-btn--${item.firebaseKey}">Edit Author</button>
                                                     <button class="btn btn-danger" id="delete-author--${item.firebaseKey}">Delete Author</button>
                                                     </div>
