@@ -7,7 +7,7 @@ const addAuthorForm = () => {
                                                             <input type="text" class="form-control" id="first" aria-describedby="firstName" placeholder="First Name" required>
                                                           </div>
                                                           <div class="form-group">
-                                                            <label for="title">Book Title</label>
+                                                            <label for="title">Last Name</label>
                                                             <input type="text" class="form-control" id="last" aria-describedby="bookTitle" placeholder="Last Name" required>
                                                           </div>
                                                           <div class="form-group">
